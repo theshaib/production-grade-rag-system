@@ -1,0 +1,29 @@
+# Docker Compose configuration for local infrastructure.
+services:
+  postgres:
+    # PostgreSQL image with the pgvector extension already installed.
+    image: pgvector/pgvector:pg17
+
+    # Give the database container a predictable local name.
+    container_name: rag-postgres
+
+    # Restart the database automatically unless it is manually stopped.
+    restart: unless-stopped
+
+    environment:
+      # Local development database credentials.
+      POSTGRES_DB: rag_db
+      POSTGRES_USER: rag_user
+      POSTGRES_PASSWORD: rag_password
+
+    ports:
+      # Expose PostgreSQL locally on the default PostgreSQL port.
+      - "5432:5432"
+
+    volumes:
+      # Persist database data even when the container is restarted.
+      - rag_postgres_data:/var/lib/postgresql/data
+
+# Persistent Docker volume used by PostgreSQL.
+volumes:
+  rag_postgres_data:
