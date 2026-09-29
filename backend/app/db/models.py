@@ -87,9 +87,9 @@ class Chunk(Base):
     )
 
     # Semantic vector representation of the chunk.
-    # 1536 dimensions will match our planned embedding model.
+    # Nomic Embed Text returns 768-dimensional vectors.
     embedding: Mapped[list[float] | None] = mapped_column(
-        Vector(1536),
+        Vector(768),
         nullable=True,
     )
 

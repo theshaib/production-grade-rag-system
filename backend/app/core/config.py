@@ -13,6 +13,11 @@ class Settings(BaseSettings):
     # PostgreSQL connection string used by SQLAlchemy.
     database_url: str
 
+    # Optional hosted generation provider; embeddings remain local through Ollama.
+    ai_api_key: str | None = None
+    ai_model: str = "llama-3.1-8b-instant"
+    ai_base_url: str = "https://api.groq.com/openai/v1/chat/completions"
+
     # Load configuration values from backend/.env.
     model_config = SettingsConfigDict(
         env_file=".env",

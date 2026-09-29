@@ -7,6 +7,7 @@ from sqlalchemy import text
 
 # Import the document API router.
 from app.api.documents import router as documents_router
+from app.api.query import router as query_router
 
 # Import centralized application configuration.
 from app.core.config import settings
@@ -31,6 +32,7 @@ app.add_middleware(
 )
 
 app.include_router(documents_router)
+app.include_router(query_router)
 
 
 # Basic health check for the FastAPI service.
