@@ -5,6 +5,9 @@ from fastapi.middleware.cors import CORSMiddleware
 # SQLAlchemy text() allows us to execute a simple SQL statement.
 from sqlalchemy import text
 
+# Import the document API router.
+from app.api.documents import router as documents_router
+
 # Import centralized application configuration.
 from app.core.config import settings
 
@@ -23,9 +26,11 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins,
     allow_credentials=True,
-    allow_methods=["GET"],
+    allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
+
+app.include_router(documents_router)
 
 
 # Basic health check for the FastAPI service.
